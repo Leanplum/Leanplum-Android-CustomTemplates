@@ -20,28 +20,28 @@ Full Documentation can be found in [Leanplum Docs][1].
 
 ## Setup
 
-Once the templates are synced, they will appear in the Campaign Composer under Custom In-App section:
+Once the templates are synced, they will appear in the Campaign Composer under Custom In-App section:   
 ![Custom In-App section][3]
 
 ### 3-button Confirm
 
-Composer:
-![Alert Composer][4]
-Message:
-<img src="/readme_images/3-buttons.png" alt="Confirm Message" height="800px">
-Results:
-![Alert Results][6]
-Milestones:
-![Alert Milestones][7]
+Composer:  
+![Alert Composer][4]  
+Message:  
+<img src="/readme_images/3-buttons.png" alt="Confirm Message" height="800px">  
+Results:  
+![Alert Results][6]  
+Milestones:  
+![Alert Milestones][7]  
 
 ### Slider
 
-Composer:
-![Slider Composer][8]
-Message:
-<img src="/readme_images/slider_anim.gif" alt="Slider Message" height="900px">
-Milestones:
-![Slider Milestones][10]
+Composer:  
+![Slider Composer][8]  
+Message:  
+<img src="/readme_images/slider_anim.gif" alt="Slider Message" height="900px">  
+Milestones:  
+![Slider Milestones][10]  
 
 ### App Rating
 
