@@ -1,7 +1,7 @@
 # Leanplum-Android-CustomTemplates
-Custom message templates example for Android
 
-This project illustrates how to define a new message/action template in Leanplum. The samples include defining a 3-button Confirm message and a Slider (Pager) template. They are available in **Java**.
+This project illustrates how to define a new message/action template in Leanplum. The samples include a definition of 3-button Confirm message, Slider (Pager) template, and App Review Request. They are available in **Java**.
+If you need to change the default templates, that are shipped with the SDK, you can copy the whole **com.leanplum.messagetemplates** package from [SDK Templates][14] to your project.
 
 #### [Slider (Pager)](#Slider)
 #### [3-button Alert](#3-button-Confirm)
@@ -62,3 +62,4 @@ Full documentation about the App Review functionality can be found in [Leanplum 
 [11]: https://developer.android.com/guide/playcore/in-app-review
 [12]: https://docs.leanplum.com/docs/app-review-request#android-50
 [13]: /app/src/main/java/com/leanplum/App.java
+[14]: https://github.com/Leanplum/Leanplum-Android-SDK/tree/master/AndroidSDKCore/src/main/java/com/leanplum/messagetemplates
