@@ -36,6 +36,8 @@ Milestones:
 
 ### Slider
 
+Slider class defines a message template containing several slides similar to on-boarding message. Currently due to specifics of Dashboard functionality the slides are hardcoded to 6. If you want to use any of them just add image for that slide from Dashboard. If you need more than 6 you can change the **com.leanplum.customtemplates.Slide.MAX_SLIDES** constant.
+
 Composer:  
 ![Slider Composer][8]  
 Message:  
