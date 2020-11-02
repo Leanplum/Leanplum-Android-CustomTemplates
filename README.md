@@ -4,7 +4,7 @@ This project illustrates how to define a new message/action template in Leanplum
 If you need to change the default templates, that are shipped with the SDK, you can copy the whole **com.leanplum.messagetemplates** package from [SDK Templates][14] to your project.
 
 #### [Slider (Pager)](#Slider)
-#### [3-button Alert](#3-button-Confirm)
+#### [3-button Confirm](#3-button-Confirm)
 #### [App Review Request](#App-Review-Request)
 
 ## Installation
