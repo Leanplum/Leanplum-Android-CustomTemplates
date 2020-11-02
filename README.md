@@ -5,7 +5,7 @@ If you need to change the default templates, that are shipped with the SDK, you 
 
 #### [Slider (Pager)](#Slider)
 #### [3-button Alert](#3-button-Confirm)
-#### [App Review Request](#App-Rating)
+#### [App Review Request](#App-Review-Request)
 
 ## Installation
 Checkout repository and open with Android Studio. Enter your APP_ID and APP_DEVKEY in [App.java file][13].
