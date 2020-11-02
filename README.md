@@ -36,7 +36,7 @@ Milestones:
 
 ### Slider
 
-Slider class defines a message template containing several slides similar to on-boarding message. Currently due to specifics of Dashboard functionality the slides are hardcoded to 6. If you want to use any of them just add image for that slide from Dashboard. If you need more than 6 you can change the **com.leanplum.customtemplates.Slide.MAX_SLIDES** constant.
+[SliderTemplate][15] class defines a message template containing several slides similar to on-boarding message. Currently due to specifics of Dashboard functionality the slides are hardcoded to 6. If you want to use any of them just add image for that slide from Dashboard. If you need more than 6 you can change the **SliderTemplate.MAX_SLIDES** constant.
 
 Composer:  
 ![Slider Composer][8]  
@@ -65,3 +65,4 @@ Full documentation about the App Review functionality can be found in [Leanplum 
 [12]: https://docs.leanplum.com/docs/app-review-request#android-50
 [13]: /app/src/main/java/com/leanplum/App.java
 [14]: https://github.com/Leanplum/Leanplum-Android-SDK/tree/master/AndroidSDKCore/src/main/java/com/leanplum/messagetemplates
+[15]: https://github.com/Leanplum/Leanplum-Android-CustomTemplates/blob/main/app/src/main/java/com/leanplum/customtemplates/SliderTemplate.java
