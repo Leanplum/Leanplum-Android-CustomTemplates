@@ -5,10 +5,10 @@ This project illustrates how to define a new message/action template in Leanplum
 
 #### [Slider (Pager)](#Slider)
 #### [3-button Alert](#3-button-Confirm)
-#### [App Rating](#App-Rating)
+#### [App Review Request](#App-Rating)
 
 ## Installation
-Checkout and open project with Android Studio. Enter your APP_ID and APP_DEVKEY in the constants in com.leanplum.App.
+Checkout repository and open with Android Studio. Enter your APP_ID and APP_DEVKEY in [App.java file][13].
 Run project on emulator or device.
 
 Sync the new message templates to the Dashboard from Messages:  
@@ -43,7 +43,11 @@ Message:
 Milestones:  
 ![Slider Milestones][10]  
 
-### App Rating
+### App Review Request
+
+App Rating for Android is implemented using the [In-App Review API][11] of the Play Core SDK.
+Full documentation about the App Review functionality can be found in [Leanplum Docs][12].
+
 
 [1]: https://docs.leanplum.com/reference#section-android-custom-templates
 [2]: /readme_images/sync.png
@@ -55,3 +59,6 @@ Milestones:
 [8]: /readme_images/slider_composer.png
 [9]: /readme_images/slider_anim.gif
 [10]: /readme_images/slider_milestones.png
+[11]: https://developer.android.com/guide/playcore/in-app-review
+[12]: https://docs.leanplum.com/docs/app-review-request#android-50
+[13]: /app/src/main/java/com/leanplum/App.java
