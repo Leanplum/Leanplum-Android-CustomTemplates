@@ -3,9 +3,9 @@
 This project illustrates how to define a new message/action template in Leanplum. The samples include a definition of 3-button Confirm message, Slider (Pager) template, and App Review Request. They are available in **Java**.
 If you need to change the default templates, that are shipped with the SDK, you can copy the whole **com.leanplum.messagetemplates** package from [SDK Templates][14] to your project.
 
-#### [Slider (Pager)](#Slider)
-#### [3-button Confirm](#3-button-Confirm)
-#### [App Review Request](#App-Review-Request)
+#### [Slider (Pager)](#Slider-(Pager)-1)
+#### [3-button Confirm](#3-button-Confirm-1)
+#### [App Review Request](#App-Review-Request-1)
 
 ## Installation
 Checkout repository and open with Android Studio. Enter your APP_ID and APP_DEVKEY in [App.java file][13].
@@ -26,15 +26,15 @@ Once the templates are synced, they will appear in the Campaign Composer under C
 ### 3-button Confirm
 
 Composer:  
-![Alert Composer][4]  
+![Confirm Composer][4]  
 Message:  
 <img src="/readme_images/3-buttons.png" alt="Confirm Message" height="800px">  
 Results:  
-![Alert Results][6]  
+![Confirm Results][6]  
 Milestones:  
-![Alert Milestones][7]  
+![Confirm Milestones][7]  
 
-### Slider
+### Slider (Pager)
 
 [SliderTemplate][15] class defines a message template containing several slides similar to on-boarding message. Currently due to specifics of Dashboard functionality the slides are hardcoded to 6. If you want to use any of them just add image for that slide from Dashboard. If you need more than 6 you can change the **SliderTemplate.MAX_SLIDES** constant.
 
