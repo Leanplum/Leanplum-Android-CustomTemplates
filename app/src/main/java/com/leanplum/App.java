@@ -28,7 +28,7 @@ public class App extends Application {
   }
 
   private void initCustomTemplates() {
-    AppRating.register();
+    MessageTemplates.registerAction(new AppRating(), this);
     MessageTemplates.registerTemplate(new Confirm3Buttons(), this);
     MessageTemplates.registerTemplate(new SliderTemplate(), this);
   }

@@ -1,42 +1,39 @@
 package com.leanplum.customtemplates;
 
 import android.app.Activity;
+import android.content.Context;
+import androidx.annotation.NonNull;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
 import com.google.android.play.core.tasks.Task;
 import com.leanplum.ActionArgs;
 import com.leanplum.ActionContext;
-import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
-import com.leanplum.callbacks.ActionCallback;
-import com.leanplum.callbacks.PostponableAction;
+import com.leanplum.messagetemplates.MessageTemplate;
 
 /**
  * Registers a Leanplum action that show the app rating flow for Google Play Store.
  */
-public class AppRating {
+public class AppRating implements MessageTemplate {
 
   private static final String ACTION = "Request App Rating";
 
-  public static void register() {
-    Leanplum.defineAction(
-        ACTION,
-        Leanplum.ACTION_KIND_ACTION,
-        new ActionArgs(),
-        new ActionCallback() {
-          @Override
-          public boolean onResponse(ActionContext context) {
-            LeanplumActivityHelper.queueActionUponActive(
-                new PostponableAction() {
-                  @Override
-                  public void run() {
-                    requestAppRating();
-                  }
-                });
-            return true;
-          }
-        });
+  @NonNull
+  @Override
+  public String getName() {
+    return ACTION;
+  }
+
+  @NonNull
+  @Override
+  public ActionArgs createActionArgs(Context context) {
+    return new ActionArgs();
+  }
+
+  @Override
+  public void handleAction(ActionContext context) {
+    requestAppRating();
   }
 
   private static void requestAppRating() {
