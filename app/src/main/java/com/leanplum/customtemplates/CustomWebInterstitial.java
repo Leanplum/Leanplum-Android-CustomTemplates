@@ -8,7 +8,6 @@ import com.leanplum.ActionContext;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.callbacks.ActionCallback;
-import com.leanplum.callbacks.PostponableAction;
 import com.leanplum.messagetemplates.controllers.WebInterstitialController;
 import com.leanplum.messagetemplates.options.WebInterstitialOptions;
 
@@ -24,26 +23,39 @@ public class CustomWebInterstitial extends WebInterstitialController {
     webView.getSettings().setJavaScriptEnabled(true);
   }
 
+  private static WebInterstitialController webInterstitial;
+
   public static void register() {
     Leanplum.defineAction("Web Interstitial",
         Leanplum.ACTION_KIND_MESSAGE | Leanplum.ACTION_KIND_ACTION,
         WebInterstitialOptions.toArgs(),
+        // presentHandler:
         new ActionCallback() {
           @Override
           public boolean onResponse(ActionContext actionContext) {
-            LeanplumActivityHelper.queueActionUponActive(
-                new PostponableAction() {
-                  @Override
-                  public void run() {
-                    Activity activity = LeanplumActivityHelper.getCurrentActivity();
-                    if (activity == null || activity.isFinishing()) {
-                      return;
-                    }
-                    WebInterstitialOptions options = new WebInterstitialOptions(actionContext);
-                    CustomWebInterstitial customWebInterstitial = new CustomWebInterstitial(activity, options);
-                    customWebInterstitial.show();
-                  }
-                });
+            Activity activity = LeanplumActivityHelper.getCurrentActivity();
+            if (activity == null || activity.isFinishing()) {
+              return false;
+            }
+
+            WebInterstitialOptions options = new WebInterstitialOptions(actionContext);
+            webInterstitial = new WebInterstitialController(activity, options);
+            webInterstitial.setOnDismissListener(listener -> {
+              webInterstitial = null;
+              actionContext.actionDismissed();
+            });
+            webInterstitial.show();
+
+            return true;
+          }
+        },
+        // dismissHandler:
+        new ActionCallback() {
+          @Override
+          public boolean onResponse(ActionContext context) {
+            if (webInterstitial != null) {
+              webInterstitial.dismiss();
+            }
             return true;
           }
         });

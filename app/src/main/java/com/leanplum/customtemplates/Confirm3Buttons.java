@@ -24,6 +24,8 @@ public class Confirm3Buttons implements MessageTemplate {
   private static final String MAYBE_TEXT_VALUE = "Maybe";
   private static final String MAYBE_ACTION_ARG = "Maybe action";
 
+  private AlertDialog alertDialog;
+
   @NonNull
   @Override
   public String getName() {
@@ -45,25 +47,48 @@ public class Confirm3Buttons implements MessageTemplate {
   }
 
   @Override
-  public void handleAction(ActionContext context) {
+  public boolean present(@NonNull ActionContext context) {
     Activity activity = LeanplumActivityHelper.getCurrentActivity();
     if (activity == null || activity.isFinishing())
-      return;
+      return false;
 
-    new AlertDialog.Builder(activity)
+    alertDialog = new AlertDialog.Builder(activity)
         .setTitle(context.stringNamed(Args.TITLE))
         .setMessage(context.stringNamed(Args.MESSAGE))
         .setCancelable(false)
         .setPositiveButton(
             context.stringNamed(Args.ACCEPT_TEXT),
-            (dialog, id) -> context.runTrackedActionNamed(Args.ACCEPT_ACTION))
+            (dialog, id) -> {
+              alertDialog = null;
+              context.runTrackedActionNamed(Args.ACCEPT_ACTION);
+              context.actionDismissed();
+            })
         .setNegativeButton(
             context.stringNamed(Args.CANCEL_TEXT),
-            (dialog, id) -> context.runActionNamed(Args.CANCEL_ACTION))
+            (dialog, id) -> {
+              alertDialog = null;
+              context.runActionNamed(Args.CANCEL_ACTION);
+              context.actionDismissed();
+            })
         .setNeutralButton(
             context.stringNamed(MAYBE_TEXT_ARG),
-            (dialog, id) -> context.runActionNamed(MAYBE_ACTION_ARG))
-        .create()
-        .show();
+            (dialog, id) -> {
+              alertDialog = null;
+              context.runActionNamed(MAYBE_ACTION_ARG);
+              context.actionDismissed();
+            })
+        .create();
+    alertDialog.show();
+    return true;
+  }
+
+  @Override
+  public boolean dismiss(@NonNull ActionContext context) {
+    if (alertDialog != null) {
+      alertDialog.dismiss();
+      alertDialog = null;
+      context.actionDismissed();
+    }
+    return true;
   }
 }

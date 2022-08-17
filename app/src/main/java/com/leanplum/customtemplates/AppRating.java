@@ -27,13 +27,21 @@ public class AppRating implements MessageTemplate {
 
   @NonNull
   @Override
-  public ActionArgs createActionArgs(Context context) {
+  public ActionArgs createActionArgs(@NonNull Context context) {
     return new ActionArgs();
   }
 
   @Override
-  public void handleAction(ActionContext context) {
+  public boolean present(@NonNull ActionContext context) {
     requestAppRating();
+    // We don't get any feedback from Google Play whether the flow has begun
+    return true;
+  }
+
+  @Override
+  public boolean dismiss(@NonNull ActionContext context) {
+    // Rating flow can't be stopped
+    return true;
   }
 
   private static void requestAppRating() {

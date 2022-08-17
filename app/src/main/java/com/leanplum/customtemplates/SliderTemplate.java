@@ -1,10 +1,13 @@
 package com.leanplum.customtemplates;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.leanplum.ActionArgs;
 import com.leanplum.ActionContext;
 import com.leanplum.Leanplum;
@@ -39,7 +42,7 @@ public class SliderTemplate implements MessageTemplate {
 
   @NonNull
   @Override
-  public ActionArgs createActionArgs(Context context) {
+  public ActionArgs createActionArgs(@NonNull Context context) {
     ActionArgs actionArgs = new ActionArgs();
     actionArgs.withColor(BG_COLOR_ARG, Color.BLACK);
     actionArgs.withColor(TITLE_COLOR_ARG, Color.BLUE);
@@ -52,14 +55,29 @@ public class SliderTemplate implements MessageTemplate {
   }
 
   @Override
-  public void handleAction(ActionContext actionContext) {
+  public boolean present(@NonNull ActionContext actionContext) {
+    // Register receiver for the activity finish event
+    LocalBroadcastManager.getInstance(Leanplum.getContext())
+        .registerReceiver(new BroadcastReceiver() {
+          @Override
+          public void onReceive(Context context, Intent intent) {
+            LocalBroadcastManager.getInstance(Leanplum.getContext()).unregisterReceiver(this);
+            actionContext.actionDismissed();
+          }
+        }, new IntentFilter(SliderActivity.SLIDER_DISMISSED));
+
+    // Start activity
     List<SlideData> slides = createSlides(actionContext);
     startSliderActivity(slides);
+    return true;
   }
 
   @Override
-  public boolean waitFilesAndVariables() {
-    return true; // there are image resources that need to be downloaded
+  public boolean dismiss(@NonNull ActionContext context) {
+    // Dismiss can't be implemented because Slider is implemented using Activity and switching
+    // activity calls this method to avoid Dialog object leaks in in-apps, which will prevent
+    // showing the Slider.
+    return true;
   }
 
   private List<SlideData> createSlides(ActionContext actionContext) {

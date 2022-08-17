@@ -1,10 +1,12 @@
 package com.leanplum.customtemplates.slider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
@@ -13,6 +15,7 @@ import com.leanplum.views.CloseButton;
 
 public class SliderActivity extends AppCompatActivity {
 
+  public static final String SLIDER_DISMISSED = "SliderDismissed";
   public static final String INTENT_SLIDES_DATA = "SLIDES_DATA";
   private SlideData[] slides;
 
@@ -24,6 +27,13 @@ public class SliderActivity extends AppCompatActivity {
 
     slides = (SlideData[]) getIntent().getExtras().get(INTENT_SLIDES_DATA);
     initViews();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    // Communicate back to MessageTemplate to notify ActionContext
+    LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(SLIDER_DISMISSED));
   }
 
   private void initViews() {
