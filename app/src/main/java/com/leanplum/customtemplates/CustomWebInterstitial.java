@@ -26,7 +26,7 @@ public class CustomWebInterstitial extends WebInterstitialController {
   private static WebInterstitialController webInterstitial;
 
   public static void register() {
-    Leanplum.defineAction("Web Interstitial",
+    Leanplum.defineAction("Custom Web Interstitial",
         Leanplum.ACTION_KIND_MESSAGE | Leanplum.ACTION_KIND_ACTION,
         WebInterstitialOptions.toArgs(),
         // presentHandler:
@@ -39,7 +39,7 @@ public class CustomWebInterstitial extends WebInterstitialController {
             }
 
             WebInterstitialOptions options = new WebInterstitialOptions(actionContext);
-            webInterstitial = new WebInterstitialController(activity, options);
+            webInterstitial = new CustomWebInterstitial(activity, options);
             webInterstitial.setOnDismissListener(listener -> {
               webInterstitial = null;
               actionContext.actionDismissed();
